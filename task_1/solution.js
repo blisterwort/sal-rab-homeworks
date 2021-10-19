@@ -39,3 +39,4 @@ function addInCartSumChange(sum, delta) {
     return newSumText;
 }
 
+// проверка смены глобального имени в git
