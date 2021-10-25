@@ -1,13 +1,17 @@
 // Исправьте функцию sendRequest
+
 // Аргументы функции:
 // - имя клиента
 // - телефон клиента
 // - объект с адресом доставки: {street, house, entrance, floor, flat}
 // - список товаров в заказе
 // - стоимость заказа с учетом скидок и доставки
+
 // Как результат функции требуется вернуть JSON,
 // cформированный в соответствии с правилами:
+
 // Объект data содержит все данные
+
 // В объекте data есть свойства:
 // - client - строка, имя клиента + телефон клиента;
 // - order - объект, содержащий данные о заказе:
@@ -34,20 +38,22 @@
 // }
 
 function sendRequest(name, phone, address, goods, sum) {
-    let data = {goods: [], order: {}};
+    let data = {client: '', order: {address: '', sum: ''}, goods: []};
 
     let countOfGoods = goods.length;
 
-    for (let i = 0; i <= countOfGoods; i += 1) {
-        data.goods.push(goods[i].title);
-    }
+        for (let i = 0; i < countOfGoods; i++) {
 
-    data.order.address = address;
-    data.order.sum = name + phone + address + goods + sum;
+            data.goods.push({title: goods[i].title, count: goods[i].count});
 
-    data.client = 'Иван';
+        }
+    
+    data.order.address = `ул. ${address.street}, дом ${address.house}, ${address.entrance} подъезд, ${address.floor} этаж, кв ${address.flat}`;
+    data.order.sum = sum;
 
-    let jsonData = JSON.stringify(data);
+    data.client = `${name} ${phone}`;
+
+    let jsonData = JSON.stringify({data: data});
 
     return jsonData;
-}
+    }
